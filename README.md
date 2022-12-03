@@ -1,5 +1,7 @@
 # AdventOfCode.Template
 
+<!--- advent_readme_stars table --->
+
 ![CI](https://github.com/eduherminio/AdventOfCode.Template/workflows/CI/badge.svg)
 
 Advent of Code template based on [AoCHelper](https://github.com/eduherminio/AoCHelper) project.
