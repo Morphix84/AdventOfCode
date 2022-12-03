@@ -27,6 +27,7 @@
                     return;
                 }
 
+                File.Create(InputFilePath);
                 File.WriteAllText(InputFilePath, task.Result);
                 _input = File.ReadLines(InputFilePath).ToArray();
                 inputValid = true;

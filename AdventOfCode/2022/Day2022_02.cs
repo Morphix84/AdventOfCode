@@ -14,7 +14,6 @@ enum RoundResult
 
 public class Day2022_02 : BaseDay
 {
-    List<List<int>> list;
     public Day2022_02()
     {
         ParseInput();
