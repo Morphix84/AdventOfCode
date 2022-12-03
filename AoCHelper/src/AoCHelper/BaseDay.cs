@@ -5,13 +5,14 @@
     /// </summary>
     public abstract class BaseDay : BaseProblem
     {
-        protected readonly string _input;
+        protected readonly string[] _input;
         protected bool inputValid = false;
         protected BaseDay()
         {
+            _input = new string[1];
             if(File.Exists(InputFilePath))
             { 
-                _input = File.ReadAllText(InputFilePath);
+                _input = File.ReadLines(InputFilePath).ToArray();
                 inputValid = true;
             }
             else
@@ -25,9 +26,9 @@
                 {
                     return;
                 }
-                
-                _input = task.Result;
-                File.WriteAllText(InputFilePath, _input);
+
+                File.WriteAllText(InputFilePath, task.Result);
+                _input = File.ReadLines(InputFilePath).ToArray();
                 inputValid = true;
             }
 
