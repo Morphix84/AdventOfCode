@@ -11,8 +11,8 @@ jobs:
       - uses: actions/checkout@v2
       - uses: k2bd/advent-readme-stars@v1
         with:
-          userId: 1234567
-          leaderboardId: 9876543
+          userId: ${{ secrets.AOC_USER_ID }}
+          leaderboardId: ${{ secrets.AOC_LEADERBOARD }}
           sessionCookie: ${{ secrets.AOC_SESSION }}
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
