@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <IsTestProject>false</IsTestProject>
+    <SonarQubeTestProject>false</SonarQubeTestProject>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Title>SheepTools.XUnit</Title>
+    <PackageId>SheepTools.XUnit</PackageId>
+    <Description>
+      Handy toolbox with XUnit-related extension methods.
+    </Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="xunit" Version="2.4.2" />
+  </ItemGroup>
+
+</Project>

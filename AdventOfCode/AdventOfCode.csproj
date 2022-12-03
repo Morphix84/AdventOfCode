@@ -15,7 +15,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Update="Inputs\*">
+    <ProjectReference Include="..\AoCHelper\src\AoCHelper\AoCHelper.csproj" />
+    <ProjectReference Include="..\SheepTools\src\SheepTools\SheepTools.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="2022\Inputs\*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

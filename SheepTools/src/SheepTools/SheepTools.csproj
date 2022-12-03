@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Title>SheepTools</Title>
+    <PackageId>SheepTools</PackageId>
+    <Description>
+      Handy toolbox with commonly used classes and extension methods.
+    </Description>
+  </PropertyGroup>
+
+</Project>

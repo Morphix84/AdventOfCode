@@ -1,0 +1,72 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29911.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{6FACD9FD-3055-4D2E-8669-C43C2F68DEE6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SheepTools.Moq.Test", "tests\SheepTools.Moq.Test\SheepTools.Moq.Test.csproj", "{1573276B-AA9A-422E-AEA6-FF686784D900}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SheepTools.Test", "tests\SheepTools.Test\SheepTools.Test.csproj", "{3F16B88F-50DE-4CA3-89A5-E626C2D6ED96}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SheepTools.XUnit.Test", "tests\SheepTools.XUnit.Test\SheepTools.XUnit.Test.csproj", "{00C7DF6B-E510-422B-BB4B-6F96B0025E43}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SheepTools", "src\SheepTools\SheepTools.csproj", "{45EBCD77-89B9-4037-981D-DCDA9636F4EC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SheepTools.Moq", "src\SheepTools.Moq\SheepTools.Moq.csproj", "{84839106-DB45-47C8-B0CA-37BF8568EF7C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SheepTools.XUnit", "src\SheepTools.XUnit\SheepTools.XUnit.csproj", "{883AAEA9-1919-4CC7-BF15-325A1E1D7CBA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B37F2DB6-C948-4334-B59E-250123966494}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		azure-pipelines.yml = azure-pipelines.yml
+		.github\workflows\ci.yml = .github\workflows\ci.yml
+		Directory.Build.props = Directory.Build.props
+		README.md = README.md
+		.github\workflows\release.yml = .github\workflows\release.yml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1573276B-AA9A-422E-AEA6-FF686784D900}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1573276B-AA9A-422E-AEA6-FF686784D900}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1573276B-AA9A-422E-AEA6-FF686784D900}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1573276B-AA9A-422E-AEA6-FF686784D900}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F16B88F-50DE-4CA3-89A5-E626C2D6ED96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F16B88F-50DE-4CA3-89A5-E626C2D6ED96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F16B88F-50DE-4CA3-89A5-E626C2D6ED96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F16B88F-50DE-4CA3-89A5-E626C2D6ED96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00C7DF6B-E510-422B-BB4B-6F96B0025E43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00C7DF6B-E510-422B-BB4B-6F96B0025E43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00C7DF6B-E510-422B-BB4B-6F96B0025E43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00C7DF6B-E510-422B-BB4B-6F96B0025E43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45EBCD77-89B9-4037-981D-DCDA9636F4EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45EBCD77-89B9-4037-981D-DCDA9636F4EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45EBCD77-89B9-4037-981D-DCDA9636F4EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45EBCD77-89B9-4037-981D-DCDA9636F4EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84839106-DB45-47C8-B0CA-37BF8568EF7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84839106-DB45-47C8-B0CA-37BF8568EF7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84839106-DB45-47C8-B0CA-37BF8568EF7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84839106-DB45-47C8-B0CA-37BF8568EF7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{883AAEA9-1919-4CC7-BF15-325A1E1D7CBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{883AAEA9-1919-4CC7-BF15-325A1E1D7CBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{883AAEA9-1919-4CC7-BF15-325A1E1D7CBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{883AAEA9-1919-4CC7-BF15-325A1E1D7CBA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1573276B-AA9A-422E-AEA6-FF686784D900} = {6FACD9FD-3055-4D2E-8669-C43C2F68DEE6}
+		{3F16B88F-50DE-4CA3-89A5-E626C2D6ED96} = {6FACD9FD-3055-4D2E-8669-C43C2F68DEE6}
+		{00C7DF6B-E510-422B-BB4B-6F96B0025E43} = {6FACD9FD-3055-4D2E-8669-C43C2F68DEE6}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3EE65CE4-02B7-4016-B99C-287E8A0CB44C}
+	EndGlobalSection
+EndGlobal

@@ -1,12 +1,10 @@
 ﻿namespace AdventOfCode;
 
-public class Day01 : BaseDay
+public class Day2022_01 : BaseDay
 {
-    private readonly string _input;
-
-    public Day01()
+    public Day2022_01()
     {
-        _input = File.ReadAllText(InputFilePath);
+        
     }
 
     public override ValueTask<string> Solve_1() => new($"Solution to {ClassPrefix} {CalculateIndex()}, part 1");
