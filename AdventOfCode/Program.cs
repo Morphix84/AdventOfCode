@@ -17,8 +17,10 @@
 //    await Solver.Solve(indexes.Where(i => i < uint.MaxValue));
 //}
 
-await Solver.SolveAll(opt =>
-{
-    opt.ShowConstructorElapsedTime = true;
-    opt.ShowTotalElapsedTimePerDay = true;
-});
+await Solver.SolveLast(opt => opt.ClearConsole = false);
+
+//await Solver.SolveAll(opt =>
+//{
+//    opt.ShowConstructorElapsedTime = true;
+//    opt.ShowTotalElapsedTimePerDay = true;
+//});
