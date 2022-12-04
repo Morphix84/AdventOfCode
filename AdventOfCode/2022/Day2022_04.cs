@@ -7,63 +7,72 @@ public class Day2022_04 : BaseDay
         ParseInput();
     }
 
-
+    List<List<int>> ranges = new List<List<int>>();
     private void ParseInput()
     {
-        for (int i = 0; i < _input.Length; i++)
+        foreach (var line in _input)
         {
-
+            var pairs = line.Split(',');
+            List<int> range = new List<int>();
+            foreach (var pair in pairs)
+            {
+                var thing = pair.Split('-');
+                range.Add(int.Parse(thing[0]));
+                range.Add(int.Parse(thing[1]));
+            }
+            ranges.Add(range);
         }
     }
 
-    private int GetValue(char c)
-    {
-        if (c >= 'A' && c <= 'Z')
-            return c - 64 + 26;
-        else
-            return c - 96;
-    }
+
     public override ValueTask<string> Solve_1()
     {
-        List<char> chars = new List<char>();
-        int sum = 0;
-        foreach(var line in _input)
+        int score = 0;
+        foreach (var pair in ranges)
         {
-            var length = line.Length / 2;
-            var string1 = line.Substring(0, length);
-            var string2 = line.Substring(length, length);
-            HashSet<char> charSet1 = new HashSet<char>(string1);
-            HashSet<char> charSet2 = new HashSet<char>(string2);
-            var both = charSet1.Where(x => charSet2.Contains(x));
-            char c = both.First();
-            chars.Add(c);
-            int val = GetValue(c);
-            sum+= val;
+            List<int> range1 = new List<int>();
+            List<int> range2 = new List<int>();
+
+            for (int i = pair[0]; i <= pair[1]; i++)
+            {
+                range1.Add(i);
+            }
+            for (int i = pair[2]; i <= pair[3]; i++)
+            {
+                range2.Add(i);
+            }
+            var intersect = range1.Where(x => range2.Contains(x)).ToList();
+            if (intersect.Count == range2.Count || intersect.Count == range1.Count)
+                score++;
         }
 
-        return new ValueTask<string>(sum.ToString());
+        return new ValueTask<string>(score.ToString());
     }
 
 
     public override ValueTask<string> Solve_2()
     {
-        List<char> chars = new List<char>();
-        int sum = 0;
-        for (int i = 0; i < _input.Length; i+=3)
-        {
-            HashSet<char> charSet1 = new HashSet<char>(_input[i]);
-            HashSet<char> charSet2 = new HashSet<char>(_input[i+1]);
-            HashSet<char> charSet3 = new HashSet<char>(_input[i+2]);
-            
-            var both = charSet1.Where(x => charSet2.Contains(x));
-            both = both.Where(x => charSet3.Contains(x));
 
-            char c = both.First();
-            chars.Add(c);
-            int val = GetValue(c);
-            sum += val;
+        int score = 0;
+        foreach (var pair in ranges)
+        {
+            List<int> range1 = new List<int>();
+            List<int> range2 = new List<int>();
+
+            for (int i = pair[0]; i <= pair[1]; i++)
+            {
+                range1.Add(i);
+            }
+            for (int i = pair[2]; i <= pair[3]; i++)
+            {
+                range2.Add(i);
+            }
+            var intersect = range1.Where(x => range2.Contains(x)).ToList();
+            if (intersect.Count != 0)
+                score++;
         }
-        return new ValueTask<string>(sum.ToString());
+
+        return new ValueTask<string>(score.ToString());
     }
 
 }
