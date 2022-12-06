@@ -12,13 +12,12 @@ public class Day2022_04 : BaseDay
     {
         foreach (var line in _input)
         {
-            var pairs = line.Split(',');
+            char[] seps = { ',', '-' };
+            var pairs = line.Split(seps);
             List<int> range = new List<int>();
             foreach (var pair in pairs)
             {
-                var thing = pair.Split('-');
-                range.Add(int.Parse(thing[0]));
-                range.Add(int.Parse(thing[1]));
+                range.Add(int.Parse(pair));
             }
             ranges.Add(range);
         }
