@@ -6,10 +6,6 @@
     <OutputType>Exe</OutputType>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="AoCHelper" Version="2.0.0" />
-  </ItemGroup>
-
   <PropertyGroup>
     <NoWarn>S101</NoWarn>
   </PropertyGroup>
