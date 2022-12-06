@@ -43,7 +43,7 @@ public class Day2022_06 : BaseDay
         const int regSize = 4;
         var reg = new BarrelRegister<char>(regSize);
         int answer = 0;
-        for(int i = 0; i < _input[0].Length; i++)
+        for (int i = 0; i < _input[0].Length; i++)
         {
             char c = _input[0][i];
             reg.Push(c);
