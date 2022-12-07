@@ -1,4 +1,6 @@
-﻿namespace AdventOfCode;
+﻿using SheepTools;
+
+namespace AdventOfCode;
 
 public class Day2022_04 : BaseDay
 {
@@ -29,17 +31,9 @@ public class Day2022_04 : BaseDay
         int score = 0;
         foreach (var pair in ranges)
         {
-            List<int> range1 = new List<int>();
-            List<int> range2 = new List<int>();
-
-            for (int i = pair[0]; i <= pair[1]; i++)
-            {
-                range1.Add(i);
-            }
-            for (int i = pair[2]; i <= pair[3]; i++)
-            {
-                range2.Add(i);
-            }
+            var range1 = RangeHelpers.GenerateRange(pair[0], pair[1]).ToList();
+            var range2 = RangeHelpers.GenerateRange(pair[2], pair[3]).ToList();
+            
             var intersect = range1.Where(x => range2.Contains(x)).ToList();
             if (intersect.Count == range2.Count || intersect.Count == range1.Count)
                 score++;
