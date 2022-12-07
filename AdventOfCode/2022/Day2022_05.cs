@@ -106,7 +106,6 @@ public class Day2022_05 : BaseDay
 
     public override ValueTask<string> Solve_1()
     {
-        int score = 0;
         foreach(var num in moves)
         {
             for (int i = 0; i < num[0]; i++)
@@ -126,22 +125,6 @@ public class Day2022_05 : BaseDay
         {
             answer += stack.Peek();
         }
-        //{
-        //    List<int> range1 = new List<int>();
-        //    List<int> range2 = new List<int>();
-
-        //    for (int i = pair[0]; i <= pair[1]; i++)
-        //    {
-        //        range1.Add(i);
-        //    }
-        //    for (int i = pair[2]; i <= pair[3]; i++)
-        //    {
-        //        range2.Add(i);
-        //    }
-        //    var intersect = range1.Where(x => range2.Contains(x)).ToList();
-        //    if (intersect.Count == range2.Count || intersect.Count == range1.Count)
-        //        score++;
-        //}
 
         return new ValueTask<string>(answer.ToString());
     }
