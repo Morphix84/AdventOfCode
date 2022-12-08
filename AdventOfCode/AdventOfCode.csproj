@@ -6,10 +6,6 @@
     <OutputType>Exe</OutputType>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="AoCHelper" Version="2.0.0" />
-  </ItemGroup>
-
   <PropertyGroup>
     <NoWarn>S101</NoWarn>
   </PropertyGroup>
@@ -28,6 +24,9 @@
   <ItemGroup>
     <None Update="2021\Inputs\19.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="2022\Inputs\07.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
