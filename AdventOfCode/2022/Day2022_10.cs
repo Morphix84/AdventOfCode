@@ -58,7 +58,8 @@ public class Day2022_10 : BaseDay
             }
         }
         display.Print();
-        return new ValueTask<string>("RZEKEFHA".ToString());
+        //return new ValueTask<string>("RZEKEFHA".ToString());
+        return new ValueTask<string>(display.ToString());
     }
 
     AoCSixHeightDisplay display = new AoCSixHeightDisplay(40);

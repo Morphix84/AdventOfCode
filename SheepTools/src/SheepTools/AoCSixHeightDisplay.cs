@@ -1,5 +1,7 @@
-﻿using System;
+﻿using SheepTools.Model;
+using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -19,14 +21,22 @@ public class AoCSixHeightDisplay
     public AoCSixHeightDisplay(int width)
     {
         Width = width;
+
+        //RZEKEFHA
+        //lcdMapping.Add("", 'A');
+        //lcdMapping.Add("", 'E');
+        //lcdMapping.Add("", 'F');
+        //lcdMapping.Add("", 'H');
+        //lcdMapping.Add("", 'K');
+        lcdMapping.Add("1110\r\n1001\r\n1001\r\n1110\r\n1010\r\n1001\r\n\r\n", 'R');
+        lcdMapping.Add("1111\r\n0001\r\n0010\r\n0100\r\n1000\r\n1111\r\n\r\n", 'Z');
     }
 
-    int currentPixel = 0;
+    Dictionary<string, char> lcdMapping = new Dictionary<string, char>();
 
     public void SetNext(bool active)
     {
         pixels.Add(active);
-        currentPixel++;
     }
 
     public string ToString()
@@ -40,10 +50,25 @@ public class AoCSixHeightDisplay
         return value;
     }
 
-    private char GetChar(int i)
+    private char GetChar(int digit)
     {
+        var arraylist = new List<BitArray>();
+        for (int i = 0; i < 6; i++)
+        {
+            var bitarray = new BitArray(4);
+            for (int j = 0; j < 4; j++)
+            {
+                bitarray[j] = pixels[i * Width + j + 5 * digit];
+            }
+            arraylist.Add(bitarray);
+        }
+        var matrix = new BitMatrix(arraylist);
+        if(lcdMapping.ContainsKey(matrix.ToString()))
+            return lcdMapping[matrix.ToString()];
         return '?';
     }
+
+    
     public void Print()
     {
         for(int i  = 0; i < pixels.Count; i++)
