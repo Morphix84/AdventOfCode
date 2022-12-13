@@ -11,6 +11,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Dijkstra.NET" Version="1.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\AoCHelper\src\AoCHelper\AoCHelper.csproj" />
     <ProjectReference Include="..\SheepTools\src\SheepTools\SheepTools.csproj" />
   </ItemGroup>
@@ -26,6 +30,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="2022\Inputs\08.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="2022\Inputs\12.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="2022\Inputs\10.txt">
