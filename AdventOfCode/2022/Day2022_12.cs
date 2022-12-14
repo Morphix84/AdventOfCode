@@ -14,31 +14,32 @@ public class Day2022_12 : BaseDay
         BuildGraph();
     }
 
-    uint Start = 0;
-    uint End = 0;
+    int Start = 0;
+    int End = 0;
 
-    Graph Graph = new Graph();
+    Graphalo.DirectedGraph<int> Graph = new Graphalo.DirectedGraph<int>();
+
 
     void BuildGraph()
     {
-        var graph = new Graph();
+        var graph = new Graphalo.DirectedGraph<int>();
 
         for (int y = 0; y < _input.Length; y++)
         {
             var line = _input[y];
-            for (int x = 0; x < _input.Length; x++)
+            for (int x = 0; x < line.Length; x++)
             {
-                graph.AddNode();
+                graph.AddVertex(GetIndex(x, y));
             }
         }
 
         for (int y = 0; y < _input.Length; y++)
         {
             var line = _input[y];
-            for (int x = 0; x < _input.Length; x++)
+            for (int x = 0; x < line.Length; x++)
             {
                 char c = _input[y][x];
-                uint index = (uint)(x + 1 + (y * _input[0].Length));
+                int index = GetIndex(x, y);
                 if (c == 'S') 
                 {
                     Start = index;
@@ -49,32 +50,32 @@ public class Day2022_12 : BaseDay
                 }
                 var height = GetHeight(c);
 
-                if(x != 0 && Math.Abs(GetHeight(_input[y][x - 1]) - height) <= 1)
+                if(x != 0 && Math.Abs(GetHeight(x-1, y) - height) <= 1)
                 {
-                    uint index2 = (uint)((x-1) + 1 + (y * _input[0].Length));
-                    graph.Connect(index, index2);
-                    graph.Connect(index2, index);
+                    int index2 = GetIndex(x - 1, y);
+                    graph.AddEdge(new Graphalo.Edge<int>(index, index2));
+                    //graph.AddEdge(new Graphalo.Edge<int>(index2, index));
                 }
 
-                if (x != (_input[0].Length - 1) && Math.Abs(GetHeight(_input[y][x + 1]) - height) <= 1)
+                if (x != (_input[0].Length - 1) && Math.Abs(GetHeight(x + 1, y) - height) <= 1)
                 {
-                    uint index2 = (uint)((x + 1) + 1 + (y * _input[0].Length));
-                    graph.Connect(index, index2);
-                    graph.Connect(index2, index);
+                    int index2 = GetIndex(x + 1, y);
+                    graph.AddEdge(new Graphalo.Edge<int>(index, index2));
+                    //graph.AddEdge(new Graphalo.Edge<int>(index2, index));
                 }
 
-                if (y != 0 && Math.Abs(GetHeight(_input[y-1][x]) - height) <= 1)
+                if (y != 0 && Math.Abs(GetHeight(x, y-1) - height) <= 1)
                 {
-                    uint index2 = (uint)(x + 1 + ((y-1) * _input[0].Length));
-                    graph.Connect(index, index2);
-                    graph.Connect(index2, index);
+                    int index2 = GetIndex(1, y-1);
+                    graph.AddEdge(new Graphalo.Edge<int>(index, index2));
+                    //graph.AddEdge(new Graphalo.Edge<int>(index2, index));
                 }
 
-                if (y != (_input.Length - 1) && Math.Abs(GetHeight(_input[y+1][x]) - height) <= 1)
+                if (y != (_input.Length - 1) && Math.Abs(GetHeight(x, y+1) - height) <= 1)
                 {
-                    uint index2 = (uint)(x + 1 + ((y+1) * _input[0].Length));
-                    graph.Connect(index, index2);
-                    graph.Connect(index2, index);
+                    int index2 = GetIndex(x, y+1);
+                    graph.AddEdge(new Graphalo.Edge<int>(index, index2));
+                    //graph.AddEdge(new Graphalo.Edge<int>(index2, index));
                 }
 
             }
@@ -83,16 +84,34 @@ public class Day2022_12 : BaseDay
         Graph = graph;
     }
 
+    int GetHeight(int x, int y)
+    {
+        char c = _input[y][x];
+        return GetHeight(c);
+    }
     int GetHeight(char c)
     {
-        return c == 'S' || c == 'E' ? 0 : c - 'a';
+        if (c == 'S' )
+            return 0;
+        if (c == 'E' )
+            return 'z' - 'a' + 1;
+        return c - 'a' + 1;
+    }
+
+    int GetIndex(int x, int y)
+    {
+        return (x + (y * _input[0].Length));
     }
 
     public override ValueTask<string> Solve_1()
     {
-        var path = Graph.Dijkstra(Start, End);
-        
-        return new ValueTask<string>(path.Distance.ToString());
+        var result = Graph.Traverse(Graphalo.Traversal.TraversalKind.Dijkstra, Start, End);
+        foreach (var e in Graph.AllEdges)
+        {
+            Console.WriteLine("From {0} to {1}", e.From.ToString(), e.To.ToString());
+        }
+        var length = result.Results.Count();
+        return new ValueTask<string>(length.ToString());
     }
 
     public override ValueTask<string> Solve_2()

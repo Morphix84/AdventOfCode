@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <PackageReference Include="Dijkstra.NET" Version="1.2.1" />
+    <PackageReference Include="Graphalo" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>
