@@ -66,7 +66,7 @@ public class Day2022_12 : BaseDay
 
                 if (y != 0 && Math.Abs(GetHeight(x, y-1) - height) <= 1)
                 {
-                    int index2 = GetIndex(1, y-1);
+                    int index2 = GetIndex(x, y-1);
                     graph.AddEdge(new Graphalo.Edge<int>(index, index2));
                     //graph.AddEdge(new Graphalo.Edge<int>(index2, index));
                 }
@@ -110,7 +110,7 @@ public class Day2022_12 : BaseDay
         {
             Console.WriteLine("From {0} to {1}", e.From.ToString(), e.To.ToString());
         }
-        var length = result.Results.Count();
+        var length = result.Results.Count() - 1;
         return new ValueTask<string>(length.ToString());
     }
 
