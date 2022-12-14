@@ -13,6 +13,7 @@
   <ItemGroup>
     <PackageReference Include="Dijkstra.NET" Version="1.2.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+    <PackageReference Include="Graphalo" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>
