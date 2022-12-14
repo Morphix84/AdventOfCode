@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <PackageReference Include="Dijkstra.NET" Version="1.2.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,6 +31,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="2022\Inputs\08.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="2022\Inputs\13.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="2022\Inputs\12.txt">
