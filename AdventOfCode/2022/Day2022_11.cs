@@ -164,6 +164,8 @@ public class Day2022_11 : BaseDay
         int rounds = 10000;
         List<Monkey> monkeys = ResetMonkeys();
 
+        //This works to keep worry under control because all Tests are "Is Divisible by" so creating a large modulo operator
+        //which is a multiple of all the individual monkeys divisors doesn't change the math and prevents the worry overflow.
         UInt64 modulo = 1;
         foreach (var m in monkeys)
             modulo *= m.Divisor;
