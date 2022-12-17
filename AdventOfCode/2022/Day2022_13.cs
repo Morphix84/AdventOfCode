@@ -77,45 +77,40 @@ public class Day2022_13 : BaseDay
 
     public static int Compare(object? left, object? right)
     {
-        if(left.GetType() == typeof(JArray))
+        if (left.GetType() != typeof(JArray) && right.GetType() != typeof(JArray))
         {
-            if(right.GetType() == typeof(JArray))
+            return CompareValueNodes(((int)((JToken)left)), ((int)((JToken)right)));
+        }
+        else if (left.GetType() == typeof(JArray) && right.GetType() == typeof(JArray))
+        {
+            for (int i = 0; i < Math.Min(((JArray)left).Count, ((JArray)right).Count); i++)
             {
-                
-                for (int i = 0; i < Math.Min(((JArray)left).Count, ((JArray)right).Count); i++)
-                {
-                    int j = Compare(((JArray)left)[i], ((JArray)right)[i]);
-                    if (j != 0)
-                        return j;
-
-
-                }
-                if (((JArray)left).Count < ((JArray)right).Count)
-                    return 1;
-                else if (((JArray)left).Count > ((JArray)right).Count)
-                    return -1;
-                return 0;
+                int j = Compare(((JArray)left)[i], ((JArray)right)[i]);
+                if (j != 0)
+                    return j;
             }
-            else
-            {
-                if (((JArray)left).Count == 0)
-                    return 1;
-                return Compare(((JArray)left)[0], right);
-            }
+            if (((JArray)left).Count < ((JArray)right).Count)
+                return 1;
+            else if (((JArray)left).Count > ((JArray)right).Count)
+                return -1;
+            return 0;
         }
         else
         {
-            if (right.GetType() == typeof(JArray))
+            if(left.GetType() != typeof(JArray))
             {
-                if (((JArray)right).Count == 0)
-                    return -1;
-                return Compare(left, ((JArray)right)[0]);
+                string s = "[" + ((int)((JToken)left)).ToString() + "]";
+                var tempLeft = JArray.Parse(s);
+                return Compare(tempLeft, right);
             }
             else
             {
-                return CompareValueNodes(((int)((JToken)left)), ((int)((JToken)right)));
+                string s = "[" + ((int)((JToken)right)).ToString() + "]";
+                var tempRight = JArray.Parse(s);
+                return Compare(left, tempRight);
             }
         }
+        throw new NotFoundException();
     }
 
     public override ValueTask<string> Solve_1()
