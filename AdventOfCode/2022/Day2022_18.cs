@@ -34,7 +34,7 @@ public class Day2022_18 : BaseDay
 
     List<(int, int, int)> nextAir = new();
 
-    void AddCubeToCheck((int,int,int) cube)
+    void AddCubeToCheck((int, int, int) cube)
     {
         if (air.Contains(cube) || cubes.Contains(cube) || nextAir.Contains(cube))
         {
@@ -68,22 +68,25 @@ public class Day2022_18 : BaseDay
                 air.Add(cube);
             }
 
-            var west = (cube.Item1 - 1, cube.Item2, cube.Item3);
-            var east = (cube.Item1 + 1, cube.Item2, cube.Item3);
-            var north = (cube.Item1, cube.Item2 + 1, cube.Item3);
-            var south = (cube.Item1, cube.Item2 - 1, cube.Item3);
-            var up = (cube.Item1, cube.Item2, cube.Item3 + 1);
-            var down = (cube.Item1, cube.Item2, cube.Item3 - 1);
-            AddCubeToCheck(west);
-            AddCubeToCheck(east);
-            AddCubeToCheck(north);
-            AddCubeToCheck(south);
-            AddCubeToCheck(up);
-            AddCubeToCheck(down);
-
+            var list = MakeSides(cube);
+            foreach (var side in list)
+            {
+                AddCubeToCheck(side);
+            }
         }
     }
 
+    List<(int, int, int)> MakeSides((int, int, int) cube)
+    {
+        List<(int, int, int)> list = new();
+        list.Add(new(cube.Item1 - 1, cube.Item2, cube.Item3));
+        list.Add(new(cube.Item1 + 1, cube.Item2, cube.Item3));
+        list.Add(new(cube.Item1, cube.Item2 + 1, cube.Item3));
+        list.Add(new(cube.Item1, cube.Item2 - 1, cube.Item3));
+        list.Add(new(cube.Item1, cube.Item2, cube.Item3 + 1));
+        list.Add(new(cube.Item1, cube.Item2, cube.Item3 - 1));
+        return list;
+    }
     public override ValueTask<string> Solve_1()
     {
         MakeCubes();
@@ -92,20 +95,13 @@ public class Day2022_18 : BaseDay
 
         foreach (var cube in cubes)
         {
-            var west = (cube.Item1 - 1, cube.Item2, cube.Item3);
-            var east = (cube.Item1 + 1, cube.Item2, cube.Item3);
-            var north = (cube.Item1, cube.Item2 + 1, cube.Item3);
-            var south = (cube.Item1, cube.Item2 - 1, cube.Item3);
-            var up = (cube.Item1, cube.Item2, cube.Item3 + 1);
-            var down = (cube.Item1, cube.Item2, cube.Item3 - 1);
+            var sideCubes = MakeSides(cube);
 
             int val = 6;
-            if (cubes.Contains(west)) val--;
-            if (cubes.Contains(east)) val--;
-            if (cubes.Contains(north)) val--;
-            if (cubes.Contains(south)) val--;
-            if (cubes.Contains(up)) val--;
-            if (cubes.Contains(down)) val--;
+            foreach (var side in sideCubes)
+            {
+                if (cubes.Contains(side)) val--;
+            }
             faces += val;
         }
 
@@ -121,24 +117,16 @@ public class Day2022_18 : BaseDay
 
         foreach (var cube in cubes)
         {
-            var west = (cube.Item1 - 1, cube.Item2, cube.Item3);
-            var east = (cube.Item1 + 1, cube.Item2, cube.Item3);
-            var north = (cube.Item1, cube.Item2 + 1, cube.Item3);
-            var south = (cube.Item1, cube.Item2 - 1, cube.Item3);
-            var up = (cube.Item1, cube.Item2, cube.Item3 + 1);
-            var down = (cube.Item1, cube.Item2, cube.Item3 - 1);
+            var sides = MakeSides(cube);
 
             int val = 0;
-            if (air.Contains(west)) val++;
-            if (air.Contains(east)) val++;
-            if (air.Contains(north)) val++;
-            if (air.Contains(south)) val++;
-            if (air.Contains(up)) val++;
-            if (air.Contains(down)) val++;
+            foreach (var side in sides)
+            {
+                if (air.Contains(side)) val++;
+            }
             faces += val;
         }
 
-        //2069 too low
         return new ValueTask<string>(faces.ToString());
     }
 
