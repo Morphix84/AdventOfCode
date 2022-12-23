@@ -33,8 +33,8 @@ public record IntPoint
         {
             '>' => this with { X = X + distance },
             '<' => this with { X = X - distance },
-            '^' => this with { Y = Y + distance },
-            'v' => this with { Y = Y - distance },
+            '^' => this with { Y = Y - distance },
+            'v' => this with { Y = Y + distance },
             _ => throw new ArgumentException("Supported directions: >, <, ^, v")
         };
     }
@@ -45,8 +45,8 @@ public record IntPoint
         {
             Direction.Right => this with { X = X + distance },
             Direction.Left => this with { X = X - distance },
-            Direction.Up => this with { Y = Y + distance },
-            Direction.Down => this with { Y = Y - distance },
+            Direction.Up => this with { Y = Y - distance },
+            Direction.Down => this with { Y = Y + distance },
             _ => throw new NotSupportedException($"Direction {direction} isn't supported yet")
         };
     }
