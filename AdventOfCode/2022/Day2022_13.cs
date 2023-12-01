@@ -6,59 +6,6 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 namespace AdventOfCode;
 
-public class Node
-{
-    public int Value = -1;
-    public List<Node> Nodes = new List<Node>();
-    public Node(string s)
-    {
-        s = s.Trim(',');
-        if (string.IsNullOrEmpty(s))
-            return;
-
-        
-
-        if (s[0] == '[')
-        {
-            s = s.Substring(1, s.Length - 2);
-
-            int ptr = 0;
-            int listdepth = 0;
-            string sub = "";
-            while (ptr < s.Length)
-            {
-                char c = s[ptr++];
-                sub += c;
-                if (c == '[')
-                    listdepth++;
-                else if (c == ']')
-                    listdepth--;
-                else if (c == ',' && listdepth == 0)
-                {
-                    Nodes.Add(new Node(sub));
-                    sub = "";
-                }
-            }
-            Nodes.Add(new Node(sub));
-        }
-        else if (s.Length > 0)
-        {
-            try
-            {
-                Value = int.Parse(s);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            
-        }
-    }
-
-
-
-    
-}
 public class Day2022_13 : BaseDay
 {
     public Day2022_13()
@@ -77,45 +24,40 @@ public class Day2022_13 : BaseDay
 
     public static int Compare(object? left, object? right)
     {
-        if(left.GetType() == typeof(JArray))
+        if (left.GetType() != typeof(JArray) && right.GetType() != typeof(JArray))
         {
-            if(right.GetType() == typeof(JArray))
+            return CompareValueNodes(((int)((JToken)left)), ((int)((JToken)right)));
+        }
+        else if (left.GetType() == typeof(JArray) && right.GetType() == typeof(JArray))
+        {
+            for (int i = 0; i < Math.Min(((JArray)left).Count, ((JArray)right).Count); i++)
             {
-                
-                for (int i = 0; i < Math.Min(((JArray)left).Count, ((JArray)right).Count); i++)
-                {
-                    int j = Compare(((JArray)left)[i], ((JArray)right)[i]);
-                    if (j != 0)
-                        return j;
-
-
-                }
-                if (((JArray)left).Count < ((JArray)right).Count)
-                    return 1;
-                else if (((JArray)left).Count > ((JArray)right).Count)
-                    return -1;
-                return 0;
+                int j = Compare(((JArray)left)[i], ((JArray)right)[i]);
+                if (j != 0)
+                    return j;
             }
-            else
-            {
-                if (((JArray)left).Count == 0)
-                    return 1;
-                return Compare(((JArray)left)[0], right);
-            }
+            if (((JArray)left).Count < ((JArray)right).Count)
+                return 1;
+            else if (((JArray)left).Count > ((JArray)right).Count)
+                return -1;
+            return 0;
         }
         else
         {
-            if (right.GetType() == typeof(JArray))
+            if(left.GetType() != typeof(JArray))
             {
-                if (((JArray)right).Count == 0)
-                    return -1;
-                return Compare(left, ((JArray)right)[0]);
+                string s = "[" + ((int)((JToken)left)).ToString() + "]";
+                var tempLeft = JArray.Parse(s);
+                return Compare(tempLeft, right);
             }
             else
             {
-                return CompareValueNodes(((int)((JToken)left)), ((int)((JToken)right)));
+                string s = "[" + ((int)((JToken)right)).ToString() + "]";
+                var tempRight = JArray.Parse(s);
+                return Compare(left, tempRight);
             }
         }
+        throw new NotFoundException();
     }
 
     public override ValueTask<string> Solve_1()
@@ -147,27 +89,56 @@ public class Day2022_13 : BaseDay
         return new ValueTask<string>(total.ToString());
     }
 
+    public override ValueTask<string> Solve_2()
+    {
+        List<string> codes = new List<string>();
+        codes.Add("[[2]]");
+        codes.Add("[[6]]");
+
+        char[] seps = { '\n', '\r', '\t' };
+        foreach (var line in _input)
+        {
+            if (string.IsNullOrEmpty(line)) continue;
+            codes.Add(line.TrimEnd(seps));
+        }
+        bool inOrder = false;
+        while (!inOrder)
+        {
+            inOrder = true;
+            for (int i = 0; i < codes.Count-1; i++)
+            {
+                
+                var string1 = codes[i];
+                var string2 = codes[i+1];
+                if (!CheckOrder(string1, string2))
+                {
+                    var temp = codes[i];
+                    codes[i] = codes[i + 1];
+                    codes[i + 1] = temp;
+                    inOrder = false;
+                }
+                
+            }
+
+        }
+
+        
+        int total = 1;
+        for(int i = 0; i < codes.Count ;i++)
+        {
+            if (codes[i].Equals("[[2]]") || codes[i].Equals("[[6]]"))
+                total *= (i+1);
+        }
+
+        return new ValueTask<string>(total.ToString());
+    }
+
     bool CheckOrder(string s1, string s2)
     {
-        //Node node1 = new Node(s1);
-        //Node node2 = new Node(s2);
-
         var node1 = JsonConvert.DeserializeObject(s1);
         var node2 = JsonConvert.DeserializeObject(s2);
 
-
-        
         return Compare(node1, node2) == 1;
-
     }
-
-    public override ValueTask<string> Solve_2()
-    {
-        int rounds = 20;
-
-        return new ValueTask<string>(rounds.ToString());
-    }
-
-    
 
 }
