@@ -20,7 +20,7 @@ using AdventOfCode;
 
 
 
-await Solver.Solve<Day2022_13>();
+await Solver.Solve<Day2025_01>();
 //await Solver.SolveLast(opt => opt.ClearConsole = false);
 
 //await Solver.SolveAll(opt =>

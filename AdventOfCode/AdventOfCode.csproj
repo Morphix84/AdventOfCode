@@ -82,6 +82,9 @@
     <None Update="2024\Inputs\01.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="2025\Inputs\01.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="cookie.secret">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
