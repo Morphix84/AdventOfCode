@@ -6,6 +6,7 @@
     <Description>
       Handy toolbox with commonly used classes and extension methods.
     </Description>
+    <TargetFramework>net9.0</TargetFramework>
   </PropertyGroup>
 
 </Project>
