@@ -36,6 +36,7 @@ public class Day2025_02 : BaseDay
         long sum = 0;
         foreach (var range in _ranges)
         {
+            
             for(long i = range.Item1; i <= range.Item2; i++)
             {
                 if(!IsValidSimple(i))
@@ -52,13 +53,19 @@ public class Day2025_02 : BaseDay
     {
         
         string s = Value.ToString();
-        if (s.Length%2 != 0)
+        int length = s.Length;
+        bool stillTrue = true;
+        if (length % 2 != 0)
         {
             return true;
         }
-        string one = s.Substring(0, s.Length / 2);
-        string two = s.Substring(s.Length / 2, s.Length / 2);
-        return !one.Equals(two);
+        for (int i = 0; (i < length / 2) && stillTrue; i++)
+        {
+            stillTrue = s[i] == s[i + length / 2];
+        }
+        //string one = s.Substring(0, length / 2);
+        //string two = s.Substring(length / 2, length / 2);
+        return !stillTrue;
     }
     private bool IsValid(long Value)
     {
