@@ -19,8 +19,8 @@ using AdventOfCode;
 
 
 
-//await Solver.Solve<Day2025_01>();
-await Solver.SolveLast();
+await Solver.Solve<Day2025_04>();
+//await Solver.SolveLast();
 //await Solver.SolveLast(opt => opt.ClearConsole = false);
 
 //await Solver.SolveAll(opt =>
