@@ -77,36 +77,21 @@ public class Day2025_05 : BaseDay
                         isConsistent = false;
                         ExcFresh[j] = new Tuple<long, long>(last + 1, ExcFresh[j].Item2);
                     }
-                    if (ExcFresh[j].Item1 > ExcFresh[j].Item2)
-                    {
-                        //isConsistent = false;
-                    }
-                    else
-                    {
+
+                    if (!(ExcFresh[j].Item1 > ExcFresh[j].Item2))
+                    {                   
                         last = ExcFresh[j].Item2;
                     }
                 }
                 ExcFresh.Sort();
             }
             ExcFresh.RemoveAll(x => x.Item2 < x.Item1);
-            ExcFresh.Sort();
 
         }
-       long sum = 0;
-        bool stillConsistent = true;
-        long lastNum = 0;
+
+        long sum = 0;
         foreach (var excPair in ExcFresh)
         {
-            if (excPair.Item1 <= lastNum)
-            {
-                stillConsistent = false;
-            }
-            if(excPair.Item1 > excPair.Item2)
-            {
-                stillConsistent = false;
-            }
-            lastNum = excPair.Item2;
-                
             sum += excPair.Item2 - excPair.Item1 + 1;
         }
         return new ValueTask<string>(sum.ToString());
