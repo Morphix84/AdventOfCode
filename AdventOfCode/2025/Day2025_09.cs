@@ -79,35 +79,15 @@ public class Day2025_09 : BaseDay
         }
         LineFill(Coords[0], Coords[Coords.Count - 1], 'G');
 
-        var dir1 = (Coords[0].Item1 + 1, Coords[0].Item2);
-        var dir2 = (Coords[0].Item1 - 1, Coords[0].Item2);
-        var dir3 = (Coords[0].Item1, Coords[0].Item2 + 1);
-        var dir4 = (Coords[0].Item1, Coords[0].Item2 - 1);
-        if(!Grid.ContainsKey(dir1))
-        {
-            FloodFill(dir1, 'B', gridsize);
-        }
-        if (!Grid.ContainsKey(dir2))
-        {
-            FloodFill(dir2, 'W', gridsize);
-        }
-        if (!Grid.ContainsKey(dir3))
-        {
-            FloodFill(dir3, 'U', gridsize);
-        }
-        if (!Grid.ContainsKey(dir4))
-        {
-            FloodFill(dir4, 'O', gridsize);
-        }
-
         long largestarea = 0;
         for (int i = 0; i < Coords.Count; i++)
         {
+            Console.WriteLine(i.ToString());
             var c1 = Coords[i];
             for (int j = i + 1; j < Coords.Count; j++)
             {
                 var c2 = Coords[j];
-                if(IsValid(c1, c2))
+                if (IsValid3(c1, c2))
                 {
                     long height = Math.Abs(c1.Item1 - c2.Item1) + 1;
                     long width = Math.Abs(c1.Item2 - c2.Item2) + 1;
@@ -119,7 +99,110 @@ public class Day2025_09 : BaseDay
         }
 
 
+        //var dir1 = (Coords[0].Item1 + 1, Coords[0].Item2);
+        //var dir2 = (Coords[0].Item1 - 1, Coords[0].Item2);
+        //var dir3 = (Coords[0].Item1, Coords[0].Item2 + 1);
+        //var dir4 = (Coords[0].Item1, Coords[0].Item2 - 1);
+        //if(!Grid.ContainsKey(dir1))
+        //{
+        //    FloodFill(dir1, 'B', gridsize);
+        //}
+        //if (!Grid.ContainsKey(dir2))
+        //{
+        //    FloodFill(dir2, 'W', gridsize);
+        //}
+        //if (!Grid.ContainsKey(dir3))
+        //{
+        //    FloodFill(dir3, 'U', gridsize);
+        //}
+        //if (!Grid.ContainsKey(dir4))
+        //{
+        //    FloodFill(dir4, 'O', gridsize);
+        //}
+
+        //long largestarea = 0;
+        //for (int i = 0; i < Coords.Count; i++)
+        //{
+        //    var c1 = Coords[i];
+        //    for (int j = i + 1; j < Coords.Count; j++)
+        //    {
+        //        var c2 = Coords[j];
+        //        if(IsValid(c1, c2))
+        //        {
+        //            long height = Math.Abs(c1.Item1 - c2.Item1) + 1;
+        //            long width = Math.Abs(c1.Item2 - c2.Item2) + 1;
+        //            long area = height * width;
+        //            if (area > largestarea)
+        //                largestarea = area;
+        //        }
+        //    }
+        //}
+
+
         return new ValueTask<string>(largestarea.ToString());
+    }
+
+    private bool IsValid3((int, int) First, (int, int) Second)
+    {
+        bool charFound = false;
+        char c = '?';
+        int x1 = Math.Min(First.Item1, Second.Item1);
+        int x2 = Math.Max(First.Item1, Second.Item1);
+        int y1 = Math.Min(First.Item2, Second.Item2);
+        int y2 = Math.Max(First.Item2, Second.Item2);
+        for(int x = x1 + 1; x < x2; x++)
+        {
+            if (Grid.ContainsKey((x, y1+1)))
+            {
+                return false;
+            }
+            if (Grid.ContainsKey((x, y2 - 1)))
+            {
+                return false;
+            }
+        }
+
+        for (int y = y1 + 1; y < y2; y++)
+        {
+            if (Grid.ContainsKey((x1+1, y)))
+            {
+                return false;
+            }
+            if (Grid.ContainsKey((x2-1, y)))
+            {
+                return false;
+            }
+        }
+
+
+        return true;
+    }
+
+    private bool IsValid2((int, int) First, (int, int) Second)
+    {
+        bool charFound = false;
+        char c = '?';
+        int x1 = Math.Min(First.Item1, Second.Item1);
+        int x2 = Math.Max(First.Item1, Second.Item1);
+        int y1 = Math.Min(First.Item2, Second.Item2);
+        int y2 = Math.Max(First.Item2, Second.Item2);
+        x1++;
+        x2--;
+        y1++;
+        y2--;
+
+        for (int x = x1; x <= x2; x++)
+        {
+            for (int y = y1; y <= y2; y++)
+            {
+                if (Grid.ContainsKey((x, y)))
+                {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 
     private bool IsValid((int,int) First, (int,int) Second)
@@ -135,6 +218,10 @@ public class Day2025_09 : BaseDay
         {
             for(int y = y1; y <= y2; y++)
             {
+                if (!Grid.ContainsKey((x,y)))
+                {
+                    return false;
+                }
                 char thischar = Grid[(x, y)];
                 if(thischar != 'R' && thischar != 'G')
                 {
