@@ -38,15 +38,20 @@ public class Day2025_07 : BaseDay
     public override ValueTask<string> Solve_1()
     {
         List<(int,int)> Beams = new List<(int,int)> ();
+        List<(int, int)> ProcessedBeams = new List<(int, int)>();
         Beams.Add(Start);
         int sum = 0;
 
         while(Beams.Count > 0)
         {
             var Beam = Beams[0];
+            
             Beams.RemoveAt(0);
             if (!Grid.ContainsKey(Beam))
                 continue;
+            if (ProcessedBeams.Contains(Beam))
+                continue;
+            ProcessedBeams.Add(Beam);
 
             if (Grid[Beam] == '^')
             {
@@ -55,9 +60,9 @@ public class Day2025_07 : BaseDay
                 var left = (Beam.Item1 - 1, Beam.Item2);
                 var right = (Beam.Item1 + 1, Beam.Item2);
 
-                if(!Beams.Contains(left))
+                if(!Beams.Contains(left) && !ProcessedBeams.Contains(left))
                     Beams.Add(left);
-                if(!Beams.Contains(right))
+                if(!Beams.Contains(right) && !ProcessedBeams.Contains(right))
                     Beams.Add(right);
             }
             else if (Beam.Item2 > _input.Length)
@@ -69,6 +74,7 @@ public class Day2025_07 : BaseDay
                 //Keep going down.
                 Beams.Add((Beam.Item1, Beam.Item2 + 1));
             }
+            
         }
         
         return new ValueTask<string>(sum.ToString());
